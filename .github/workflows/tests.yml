@@ -2,6 +2,26 @@ name: Run Unit Tests
 
 on:
   push:
+    branches-ignore:
+      - main
+    paths:
+      - "parking_fee.py"
+      - "parking_permit.py"
+      - "test_parking.py"
+      - ".github/workflows/tests.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "parking_fee.py"
+      - "parking_permit.py"
+      - "test_parking.py"
+      - ".github/workflows/tests.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   test:
@@ -14,6 +34,7 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.13"
+          cache: "pip"
 
       - name: Install dependencies
         run: |
