@@ -1,3 +1,3 @@
-/.pytest_cache
-/parking_meter-specification.pdf
-/__pycache__
+__pycache__/
+*.py[cod]
+.pytest_cache/
